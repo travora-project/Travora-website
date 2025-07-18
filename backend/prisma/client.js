@@ -1,16 +1,14 @@
 const { PrismaClient } = require('@prisma/client');
 
-const prisma = new PrismaClient();
+let prisma;
 
-async function connectToPrisma() {
-  try {
-    await prisma.$connect();
-    console.log("✅ PostgreSQL (Auth DB) connected via Prisma");
-  } catch (error) {
-    console.error("❌ Failed to connect to PostgreSQL (Auth DB):", error.message);
+if (process.env.NODE_ENV === 'production') {
+  prisma = new PrismaClient();
+} else {
+  if (!global.prisma) {
+    global.prisma = new PrismaClient();
   }
+  prisma = global.prisma;
 }
-
-connectToPrisma();
 
 module.exports = prisma;
