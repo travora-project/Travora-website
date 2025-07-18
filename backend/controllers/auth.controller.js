@@ -35,4 +35,47 @@ const signupUser = async (req, res) => {
   }
 };
 
-module.exports = { signupUser };
+const loginUser = async (req, res) => {
+  try {
+    const { email, clerkUserId } = req.body;
+
+    const user = await prisma.user.findFirst({
+      where: {
+        OR: [
+          { email: email },
+          { clerkId: clerkUserId }
+        ]
+      },
+      include: {
+        agent: true
+      }
+    });
+
+    if (!user) {
+      return res.status(404).json({ message: "User not found" });
+    }
+
+    if (user.status !== "active") {
+      return res.status(403).json({ message: "Account is not active" });
+    }
+
+    await prisma.user.update({
+      where: { id: user.id },
+      data: { lastLoginAt: new Date() }
+    });
+
+    const { passwordHash, ...userWithoutPassword } = user;
+    
+    res.status(200).json({ 
+      message: "Login successful", 
+      user: userWithoutPassword,
+      role: user.agent ? "agent" : "user"
+    });
+
+  } catch (err) {
+    console.error("Login Error:", err);
+    res.status(500).json({ message: "Login failed", error: err.message });
+  }
+};
+
+module.exports = { signupUser, loginUser };
