@@ -2,25 +2,25 @@ const express = require("express");
 const cors = require("cors");
 require("dotenv").config();
 
-const prisma = require("./prisma/client"); // ✅ Import Prisma
-const connectDB = require("./config/db");  // Optional: MongoDB if used
+const prisma = require("./prisma/client"); // ✅ Prisma Client
+const connectDB = require("./config/db");  // Optional MongoDB connection
 const authRoutes = require("./routes/auth.routes.js");
 const bookingRoutes = require("./routes/booking.routes.js");
 
 const app = express();
 
-// 🔌 Optional MongoDB connect
+// Optional: connect to MongoDB (if used)
 connectDB();
 
 // 🔐 Middleware
 app.use(cors());
 app.use(express.json());
 
-// 📌 API Routes
-app.use("/api/auth", authRoutes);
-app.use("/api", bookingRoutes);
+// 📌 Routes
+app.use("/api/auth", authRoutes);     // 🔐 Login/Signup (JWT-based)
+app.use("/api", bookingRoutes);       // Other APIs
 
-// 🧪 Health Check
+// ✅ Health Check
 app.get("/", (req, res) => {
   res.send("🚀 Backend is running!");
 });
