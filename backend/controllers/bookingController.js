@@ -1,12 +1,26 @@
 const Booking = require("../models/Booking");
+const Trip = require("../models/Trip");
+
 
 const createBooking = async (req, res) => {
   try {
-    const userId = req.user.id;
     const { tripId, paymentMode } = req.body;
+    const userId = req.user?.id;
 
-    if (!tripId) {
-      return res.status(400).json({ message: "Trip ID is required" });
+    console.log("Received booking request with tripId:", tripId, "and userId:", userId);
+
+    if (!tripId || !paymentMode) {
+      return res.status(400).json({ message: "Trip ID and payment mode are required" });
+    }
+
+    const trip = await Trip.findById(tripId);
+    if (!trip) {
+      return res.status(404).json({ message: "Trip not found" });
+    }
+
+    const existingBooking = await Booking.findOne({ userId, tripId });
+    if (existingBooking) {
+      return res.status(409).json({ message: "You have already booked this trip" });
     }
 
     const booking = await Booking.create({
@@ -15,12 +29,14 @@ const createBooking = async (req, res) => {
       paymentMode,
     });
 
-    res.status(201).json({ message: "Booking successful", booking });
+    return res.status(201).json({ message: "Trip booked successfully", booking });
+
   } catch (error) {
-    console.error("Booking Error:", error);
-    res.status(500).json({ message: "Failed to book trip" });
+    console.error("❌ Booking error:", error);  // full object
+    return res.status(500).json({ message: "Failed to book trip" });
   }
 };
+
 
 const getUserBookings = async (req, res) => {
   try {

@@ -6,7 +6,7 @@ const {
   getUserBookings,
 } = require("../controllers/bookingController");
 
-const { requireAuth } = require("../middlewares/requireAuth");
+const requireAuth = require("../middlewares/requireAuth"); // ✅ FIXED
 
 // 📌 Booking a trip
 router.post("/booking", requireAuth, createBooking);
