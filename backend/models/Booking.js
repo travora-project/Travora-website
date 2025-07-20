@@ -26,4 +26,7 @@ const bookingSchema = new mongoose.Schema({
   }
 });
 
+// ✅ Unique index: One booking per user-trip combo
+bookingSchema.index({ userId: 1, tripId: 1 }, { unique: true });
+
 module.exports = mongoose.model("Booking", bookingSchema);
