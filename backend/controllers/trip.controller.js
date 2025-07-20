@@ -14,3 +14,20 @@ exports.getAllTrips = async (req, res) => {
     res.status(500).json({ message: "Internal Server Error" });
   }
 };
+
+exports.getTripById = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const trip = await prisma.trip.findUnique({
+      where: { id: Number(id) },
+      include: { agent: true },
+    });
+    if (!trip) {
+      return res.status(404).json({ message: "Trip not found" });
+    }
+    res.status(200).json(trip);
+  } catch (error) {
+    console.error("Failed to fetch trip:", error);
+    res.status(500).json({ message: "Internal Server Error" });
+  }
+};
