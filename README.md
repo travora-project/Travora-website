@@ -44,17 +44,47 @@ bash
 npx prisma migrate dev --name init
 📮 Sample Payload (Signup)
 POST /api/auth/signup
-
-json
-Copy
-Edit
+for agent
+request body
 {
-  "email": "shruti@example.com",
-  "fullName": "Shruti Verma",
-  "mobileNumber": "9876501234",
-  "clerkUserId": "clerk_456",
-  "role": "agent"
+  "email": "agent.com",
+  "fullName": "Agent",
+  "mobileNumber": "9711100481",
+  "password": "123456",
+  "role": "agent",
+  "profileImage": "https://example.com/profile.jpg",
+  "dateOfBirth": "1995-08-15",
+  "agencyName": "Travora Explorers",
+  "agencyAddress": "123, MG Road, Delhi",
+  "bankAccountNumber": "123456789012",
+  "bankIfsc": "SBIN0001234",
+  "bankAccountHolderName": "Adarsh Kumar"
 }
+
+for customer
+{
+  "email": "customer.com",
+  "password": "123456",
+  "fullName": "John Doe",
+  "mobileNumber": "9835630055",
+  "role": "customer",
+  "address": "123 Main Street",
+  "city": "Delhi",
+  "state": "Delhi",
+  "country": "India"
+}
+
+For Login
+POST /api/auth/login
+
+request body
+{
+  
+   "mobileNumber": "9835630055",
+  "password": "123456"
+}
+
+
 
 Booking a Trip
 POST /api/booking
