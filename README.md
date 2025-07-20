@@ -8,44 +8,49 @@ This is the official repository for the Travora internship project.
 
 ```bash
 npm run dev
+```
 Backend
-bash
+```bash
 npm run dev
-
+```
 🔐 Signup Feature
-Accepts POST /api/auth/signup
+Accepts `POST /api/auth/signup`
 
-Creates user in PostgreSQL using Prisma
+- Creates user in PostgreSQL using Prisma
 
-If role is "agent", also creates empty Agent record
+- If role is "agent", also creates empty Agent record
 
-Clerk user ID stored as reference
+- Clerk user ID stored as reference
 
 📦 Features
-Express.js server setup
+- Express.js server setup
 
-PostgreSQL integration using Prisma
+- PostgreSQL integration using Prisma
 
-Clerk authentication (user ID reference)
+- Clerk authentication (user ID reference)
 
-Agent model connected via userId
+- Agent model connected via userId
 
-.env support with environment-based config
+- .env support with environment-based config
 
 🔧 Commands
 Install dependencies
-bash
+```bash
 npm install
+```
 Run development server
-bash
+```bash
 npm run dev
+```
 Prisma: Migrate and generate client
-bash
+```bash
 npx prisma migrate dev --name init
-📮 Sample Payload (Signup)
-POST /api/auth/signup
-for agent
+```
+📮 Sample Payload (Signup)  
+`POST /api/auth/signup`  
+for agent  
 request body
+```
 {
   "email": "agent.com",
   "fullName": "Agent",
@@ -60,8 +65,9 @@ request body
   "bankIfsc": "SBIN0001234",
   "bankAccountHolderName": "Adarsh Kumar"
 }
-
+```
 for customer
+```
 {
   "email": "customer.com",
   "password": "123456",
@@ -73,21 +79,22 @@ for customer
   "state": "Delhi",
   "country": "India"
 }
-
+```
 For Login
-POST /api/auth/login
+`POST /api/auth/login`
 
 request body
+```
 {
   
    "mobileNumber": "9835630055",
   "password": "123456"
 }
-
+```
 
 
 Booking a Trip
-POST /api/booking
+`POST /api/booking`
 Books a trip for the logged-in user with the role of customer.
 
 🔐 Authorization Required
@@ -96,21 +103,23 @@ Books a trip for the logged-in user with the role of customer.
 ❌ Only customers are allowed to book
 
 📥 Request Headers
-http
+```http
 Authorization: Bearer <JWT_TOKEN>
 Content-Type: application/json
+```
 📤 Request Body
-json
+```json
 
 {
   "tripId": "687c7fa5f77bfc9fd9d5270e"
 }
+```
 tripId (string, required): ID of the trip the user wants to book.
 
 ✅ Success Response
-Status: 201 Created
+`Status: 201 Created`
 
-json
+```json
 {
   "message": "Trip booked successfully",
   "booking": {
@@ -121,4 +130,4 @@ json
   }
 }
 
-
+```
