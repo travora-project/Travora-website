@@ -43,7 +43,7 @@ model Agent {
 }
 
 model Trip {
-  id          Int      @id @default(autoincrement())
+  id          String   @id @default(cuid())
   name        String
   destination String
   price       Int

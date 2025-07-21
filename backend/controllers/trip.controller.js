@@ -19,7 +19,7 @@ exports.getTripById = async (req, res) => {
   try {
     const { id } = req.params;
     const trip = await prisma.trip.findUnique({
-      where: { id: Number(id) },
+      where: { id },
       include: { agent: true },
     });
     if (!trip) {
