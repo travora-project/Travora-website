@@ -1,4 +1,4 @@
-﻿# Travora Project
+# Travora Project
 
 This is the official repository for the Travora internship project.
 

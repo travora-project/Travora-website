@@ -45,4 +45,17 @@ model Customer {
   country   String?
 
   user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  trips Trip[]
+}
+
+model Trip {
+  id          String   @id @default(cuid())
+  name        String
+  destination String
+  price       Int
+  startDate   DateTime
+  duration    Int
+  agentId     String
+  agent       Agent    @relation(fields: [agentId], references: [id])
 }

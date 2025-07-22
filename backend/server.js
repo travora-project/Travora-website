@@ -5,7 +5,11 @@ require("dotenv").config();
 const prisma = require("./prisma/client"); // ✅ Prisma Client
 const connectDB = require("./config/db");  // Optional MongoDB connection
 const authRoutes = require("./routes/auth.routes.js");
+
+const tripRoutes = require("./routes/trip.routes");
+
 const bookingRoutes = require("./routes/booking.routes.js");
+
 
 const app = express();
 
@@ -20,7 +24,14 @@ app.use(express.json());
 app.use("/api/auth", authRoutes);     // 🔐 Login/Signup (JWT-based)
 app.use("/api", bookingRoutes);       // Other APIs
 
+
+app.use("/trips", tripRoutes);
+
+
+// 🔍 Add this test route
+
 // ✅ Health Check
+
 app.get("/", (req, res) => {
   res.send("🚀 Backend is running!");
 });

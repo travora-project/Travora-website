@@ -81,25 +81,30 @@ const signupUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
+
   const { mobileNumber, password } = req.body;
 
   try {
     const user = await prisma.user.findUnique({
       where: { mobileNumber },
+
     });
 
     if (!user) {
       return res.status(404).json({ message: "User not found" });
     }
 
+
     const isPasswordValid = await bcrypt.compare(password, user.passwordHash);
 
     if (!isPasswordValid) {
       return res.status(401).json({ message: "Invalid credentials" });
+
     }
 
     await prisma.user.update({
       where: { id: user.id },
+
       data: { lastLoginAt: new Date() },
     });
 
