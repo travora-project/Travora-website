@@ -1,0 +1,132 @@
+
+/* Main calendar pop-up */
+.react-datepicker {
+  font-family: 'Poppins', sans-serif;
+  border: none;
+  border-radius: 1rem;
+  box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  background-color: #ffffff;
+  padding: 0.5rem;
+}
+
+/* Hide the default triangle arrow */
+.react-datepicker__triangle {
+  display: none;
+}
+
+/* Header: Contains month/year navigation */
+.react-datepicker__header {
+  background-color: #ffffff;
+  border-bottom: none;
+  padding: 1rem 0.5rem 0.5rem;
+}
+
+/* Custom header flex container */
+.calendar-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+/* Style for the <select> dropdowns */
+.calendar-header select {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #2d3748;
+  border: none;
+  border-radius: 0.375rem;
+  padding: 0.25rem 0.5rem;
+  cursor: pointer;
+  background-color: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+.calendar-header select:focus {
+  outline: none;
+  box-shadow: 0 0 0 2px rgba(107, 70, 193, 0.2);
+}
+
+/* Style for the prev/next arrow buttons */
+.calendar-header button {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5rem;
+  color: #4a5568;
+}
+.calendar-header button:hover {
+    color: #2d3748;
+}
+
+/* Day of the week labels (S, M, T...) */
+.react-datepicker__day-name {
+  color: #a0aec0;
+  font-weight: 600;
+  width: 2.25rem;
+  line-height: 2.25rem;
+}
+
+/* Individual day numbers */
+.react-datepicker__day {
+  width: 2.25rem;
+  line-height: 2.25rem;
+  border-radius: 9999px; /* Circular shape */
+  color: #4a5568;
+  transition: background-color 0.2s, color 0.2s;
+}
+
+.react-datepicker__day:hover {
+  background-color: #f0f4f8;
+}
+
+/* The currently selected day */
+.react-datepicker__day--selected,
+.react-datepicker__day--keyboard-selected {
+  background-color: #6B46C1; /* Purple from the image */
+  color: white;
+  font-weight: bold;
+}
+
+.react-datepicker__day--selected:hover {
+  background-color: #553c9a;
+}
+
+/* Days outside the current month */
+.react-datepicker__day--outside-month {
+  color: #cbd5e0;
+}
+
+/* Footer with Cancel/OK buttons */
+.calendar-footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: 1rem;
+  padding: 1rem;
+  border-top: 1px solid #e2e8f0;
+}
+
+.calendar-footer button {
+  background: none;
+  border: none;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.2s;
+}
+
+.calendar-footer .cancel-btn {
+  color: #718096;
+}
+.calendar-footer .cancel-btn:hover {
+  background-color: #f7fafc;
+}
+
+.calendar-footer .ok-btn {
+  color: #6B46C1;
+}
+.calendar-footer .ok-btn:hover {
+  background-color: #f0e6ff;
+}
