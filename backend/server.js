@@ -10,6 +10,8 @@ const tripRoutes = require("./routes/trip.routes");
 
 const bookingRoutes = require("./routes/booking.routes.js");
 
+const agentRoutes = require("./routes/agent.routes.js");
+
 
 const app = express();
 
@@ -23,7 +25,7 @@ app.use(express.json());
 // 📌 Routes
 app.use("/api/auth", authRoutes);     // 🔐 Login/Signup (JWT-based)
 app.use("/api", bookingRoutes);       // Other APIs
-
+app.use("/agent", agentRoutes);       // Agent-specific endpoints
 
 app.use("/trips", tripRoutes);
 

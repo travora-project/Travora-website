@@ -1,13 +1,8 @@
-const { PrismaClient } = require("@prisma/client");
-const prisma = new PrismaClient();
+const Trip = require("../models/Trip");
 
 exports.getAllTrips = async (req, res) => {
   try {
-    const trips = await prisma.trip.findMany({
-      include: {
-        agent: true,
-      },
-    });
+    const trips = await Trip.find({});
     res.status(200).json(trips);
   } catch (error) {
     console.error("Failed to fetch trips:", error);
@@ -18,10 +13,7 @@ exports.getAllTrips = async (req, res) => {
 exports.getTripById = async (req, res) => {
   try {
     const { id } = req.params;
-    const trip = await prisma.trip.findUnique({
-      where: { id },
-      include: { agent: true },
-    });
+    const trip = await Trip.findById(id);
     if (!trip) {
       return res.status(404).json({ message: "Trip not found" });
     }
