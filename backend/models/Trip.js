@@ -7,7 +7,12 @@ const tripSchema = new mongoose.Schema({
   location: String,
   startDate: Date,
   endDate: Date,
+  duration: Number,
   capacity: Number,
+  agentId: {
+    type: String,
+    required: true
+  }
 });
 
 const Trip = mongoose.model("Trip", tripSchema);
